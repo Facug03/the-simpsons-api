@@ -1,0 +1,37 @@
+{
+  "name": "the-simpsons-api",
+  "version": "1.0.0",
+  "description": "The simpsons api",
+  "author": "facundogonzales1550@gmail.com",
+  "type": "module",
+  "keywords": [
+    "typescript"
+  ],
+  "engines": {
+    "node": ">=18.x",
+    "npm": ">=9.x"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "lint": "eslint --ignore-path .gitignore . --ext .js,.mjs,cjs,.ts,.mts",
+    "lint:fix": "npm run lint -- --fix",
+    "typos": "chmod +x scripts/check_typos.sh && ./scripts/check_typos.sh"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "19.4.1",
+    "@commitlint/config-conventional": "19.4.1",
+    "@commitlint/types": "19.0.3",
+    "@typescript-eslint/eslint-plugin": "7.18.0",
+    "@typescript-eslint/parser": "7.18.0",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "5.2.1",
+    "eslint-plugin-simple-import-sort": "12.1.1",
+    "eslint-plugin-unicorn": "55.0.0",
+    "eslint-plugin-vitest": "0.4.1",
+    "husky": "9.1.5",
+    "lint-staged": "15.2.9",
+    "prettier": "3.3.3"
+  }
+}
