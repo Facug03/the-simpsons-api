@@ -4,9 +4,9 @@ const config = {
   useTabs: false,
   semi: true,
   singleQuote: false,
-  trailingComma: "all",
+  trailingComma: 'all',
   bracketSpacing: true,
-  arrowParens: "avoid",
-};
+  arrowParens: 'avoid'
+}
 
-export default config;
+export default config
