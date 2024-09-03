@@ -12,7 +12,8 @@
     "npm": ">=9.x"
   },
   "scripts": {
-    "prepare": "husky",
+    "dev": "npm run dev -w api",
+    "test": "npm run test -w api",
     "lint": "eslint --ignore-path .gitignore . --ext .js,.mjs,cjs,.ts,.mts",
     "lint:fix": "npm run lint -- --fix",
     "typos": "chmod +x scripts/check_typos.sh && ./scripts/check_typos.sh",
@@ -27,6 +28,7 @@
     "@typescript-eslint/parser": "7.18.0",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.0.0",
+    "eslint-config-standard": "17.1.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "5.2.1",
     "eslint-plugin-vitest": "0.4.1",
