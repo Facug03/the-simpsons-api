@@ -38,7 +38,6 @@ export class CharacterController {
 
   @Get()
   findPaginated(@Req() req: FastifyRequest, @Res() res: FastifyReply, @Query() { page = 1 }: IsPageDto) {
-    console.log({ page })
     const cacheKey = `character-paginated-${page}`
     const ttlInMs = 30000
 

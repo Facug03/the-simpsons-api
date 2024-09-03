@@ -22,9 +22,10 @@ export class LocationService {
     })
   }
 
-  async findPaginated() {
+  async findPaginated(page: number) {
     return this.databaseService.location.findMany({
       take: 20,
+      skip: (page - 1) * 20,
       select: {
         id: true,
         name: true,

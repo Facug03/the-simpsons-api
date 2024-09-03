@@ -1,4 +1,17 @@
-import { Body, Controller, Get, Inject, Param, ParseIntPipe, Post, Query, Req, Res, UsePipes } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  NotFoundException,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+  Req,
+  Res,
+  UsePipes
+} from '@nestjs/common'
 import { Prisma } from '@prisma/client'
 import { CACHE_MANAGER } from '@nestjs/cache-manager'
 import type { Cache } from 'cache-manager'
@@ -39,7 +52,25 @@ export class EpisodeController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.episodeService.findOne(id)
+  findOne(@Req() req: FastifyRequest, @Res() res: FastifyReply, @Param('id', ParseIntPipe) id: number) {
+    const cacheKey = `episode-${id}`
+    const ttlInMs = 30000
+
+    return handleCache({
+      req,
+      res,
+      cacheManager: this.cacheManager,
+      cacheKey,
+      ttlInMs,
+      getData: async () => {
+        const episode = await this.episodeService.findOne(id)
+
+        if (!episode) {
+          throw new NotFoundException('Episode not found')
+        }
+
+        return episode
+      }
+    })
   }
 }
