@@ -22,10 +22,11 @@ export class CharacterService {
     })
   }
 
-  async findPaginated() {
+  async findPaginated(page: number) {
     const count = await this.databaseService.character.count()
     const results = await this.databaseService.character.findMany({
       take: 20,
+      skip: (page - 1) * 20,
       select: {
         id: true,
         age: true,

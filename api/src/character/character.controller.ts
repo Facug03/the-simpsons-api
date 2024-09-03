@@ -8,16 +8,20 @@ import {
   UsePipes,
   NotFoundException,
   Inject,
-  Res
+  Res,
+  Req,
+  Query
 } from '@nestjs/common'
 import { CACHE_MANAGER } from '@nestjs/cache-manager'
 import { Prisma } from '@prisma/client'
-import { Cache } from 'cache-manager'
-import { FastifyReply } from 'fastify'
+import type { Cache } from 'cache-manager'
+import type { FastifyReply, FastifyRequest } from 'fastify'
 
 import { CharacterService } from './character.service'
 import { createCharactersSchema } from './dto/create-character.dto'
 import { ZodValidationPipe } from '@/src/pipes/zod-validation.pipe'
+import { IsPageDto } from '@/src/common/dto/pagination.dto'
+import { handleCache } from '@/src/utils/handle-cache'
 
 @Controller('character')
 export class CharacterController {
@@ -33,33 +37,42 @@ export class CharacterController {
   }
 
   @Get()
-  async findPaginated(@Res() res: FastifyReply) {
-    console.log(this.cacheManager)
-    const getCache = await this.cacheManager.get('character-paginated')
+  findPaginated(@Req() req: FastifyRequest, @Res() res: FastifyReply, @Query() { page = 1 }: IsPageDto) {
+    console.log({ page })
+    const cacheKey = `character-paginated-${page}`
+    const ttlInMs = 30000
 
-    if (getCache) {
-      return res.code(304).send(getCache).headers({
-        'cache-control': 'public, max-age=30000'
-      })
-    }
-
-    const data = await this.charactersService.findPaginated()
-
-    await this.cacheManager.set('character-paginated', data, 30000)
-
-    return res.code(200).send(data).headers({
-      'cache-control': 'public, max-age=30000'
+    return handleCache({
+      req,
+      res,
+      cacheManager: this.cacheManager,
+      cacheKey,
+      ttlInMs,
+      getData: () => this.charactersService.findPaginated(page)
     })
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number) {
-    const character = await this.charactersService.findOne(id)
+  findOne(@Req() req: FastifyRequest, @Res() res: FastifyReply, @Param('id', ParseIntPipe) id: number) {
+    const cacheKey = `character-${id}`
+    const ttlInMs = 30000
 
-    if (!character) {
-      throw new NotFoundException('Character not found')
-    }
+    return handleCache({
+      req,
+      res,
+      cacheManager: this.cacheManager,
+      cacheKey,
+      ttlInMs,
+      getData: async () => {
+        const character = await this.charactersService.findOne(id)
 
-    return character
+        if (!character) {
+          console.log('character not found')
+          throw new NotFoundException('Character not found')
+        }
+
+        return character
+      }
+    })
   }
 }

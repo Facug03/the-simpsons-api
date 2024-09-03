@@ -17,9 +17,10 @@ export class EpisodeService {
     return this.databaseService.episode.findUnique({ where: { id } })
   }
 
-  async findPaginated() {
+  async findPaginated(page: number) {
     return this.databaseService.episode.findMany({
       take: 20,
+      skip: (page - 1) * 20,
       select: {
         id: true,
         airdate: true,
