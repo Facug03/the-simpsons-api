@@ -1,0 +1,102 @@
+meta {
+  name: create-many
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{URL}}/character
+  body: json
+  auth: none
+}
+
+body:json {
+  [
+    {
+      "age": 39,
+      "birthdate": "1956-05-12",
+      "catchphrases": [
+        "D'oh!"
+      ],
+      "description": "Homer Simpson is the bumbling husband of Marge and father of Bart, Lisa, and Maggie. He works as a low-level safety inspector at the Springfield Nuclear Power Plant.",
+      "first_appearance_id": 1,
+      "full_body_image": "homer_full.png",
+      "gender": "Male",
+      "name": "Homer Simpson",
+      "occupation": "Safety Inspector",
+      "portrait_img": "homer_portrait.png",
+      "quotes": [
+        "I'm normally not a praying man, but if you're up there, please save me, Superman."
+      ],
+      "status": "Alive"
+    },
+    {
+      "age": 34,
+      "birthdate": "1959-10-01",
+      "catchphrases": [
+        "Mmm..."
+      ],
+      "description": "Marge Simpson is the loving and often overly patient wife of Homer. She is a devoted mother to Bart, Lisa, and Maggie.",
+      "first_appearance_id": 1,
+      "full_body_image": "marge_full.png",
+      "gender": "Female",
+      "name": "Marge Simpson",
+      "occupation": "Housewife",
+      "portrait_img": "marge_portrait.png",
+      "quotes": [
+        "You have to speak up. I'm wearing a towel."
+      ],
+      "status": "Alive"
+    },
+    {
+      "age": 10,
+      "birthdate": "1980-04-01",
+      "catchphrases": [
+        "Eat my shorts!"
+      ],
+      "description": "Bart Simpson is the mischievous, rebellious, and often immature eldest child of Homer and Marge. He is a student at Springfield Elementary School.",
+      "first_appearance_id": 1,
+      "full_body_image": "bart_full.png",
+      "gender": "Male",
+      "name": "Bart Simpson",
+      "occupation": "Student",
+      "portrait_img": "bart_portrait.png",
+      "quotes": [
+        "Don't have a cow, man!"
+      ],
+      "status": "Alive"
+    },
+    {
+      "age": 8,
+      "birthdate": "1984-05-09",
+      "catchphrases": [
+        "If anyone wants me, I’ll be in my room."
+      ],
+      "description": "Lisa Simpson is the intelligent, outspoken, and talented middle child of Homer and Marge. She is a gifted saxophonist and a student at Springfield Elementary School.",
+      "first_appearance_id": 1,
+      "full_body_image": "lisa_full.png",
+      "gender": "Female",
+      "name": "Lisa Simpson",
+      "occupation": "Student",
+      "portrait_img": "lisa_portrait.png",
+      "quotes": [
+        "Shut up, brain, or I'll stab you with a Q-tip!"
+      ],
+      "status": "Alive"
+    },
+    {
+      "age": 1,
+      "birthdate": "1988-12-17",
+      "catchphrases": [],
+      "description": "Maggie Simpson is the youngest child of Homer and Marge. Despite her young age, she is often seen with a pacifier in her mouth and has shown surprising intelligence and awareness.",
+      "first_appearance_id": 1,
+      "full_body_image": "maggie_full.png",
+      "gender": "Female",
+      "name": "Maggie Simpson",
+      "occupation": "Baby",
+      "portrait_img": "maggie_portrait.png",
+      "quotes": [],
+      "status": "Alive"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+meta {
+  name: create-many
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{URL}}/location
+  body: json
+  auth: none
+}
+
+body:json {
+  [
+    {
+      "address": "unknown",
+      "description": "Moe's Tavern, or simply called Moe's, is the local bar in Springfield. The bar is named after its owner: Moe Szyslak.",
+      "first_appearance_id": 2,
+      "image_url": "https://static.wikia.nocookie.net/simpsons/images/9/96/800px-Moe's_Tavern.png",
+      "name": "Moe's Tavern",
+      "town": "Springfield",
+      "use": "Bar"
+    },
+    {
+      "address": "742 Evergreen Terrace",
+      "description": "742 Evergreen Terrace is the main location in The Simpsons and the address of the Simpson family's house. It first appeared in the short \"Good Night\".",
+      "first_appearance_id": 3,
+      "image_url": "https://static.wikia.nocookie.net/simpsons/images/6/65/800px-742_Evergreen_Terrace.png",
+      "name": "The Simpsons house",
+      "town": "Springfield",
+      "use": "Residential house"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+meta {
+  name: create-many
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{URL}}/episode
+  body: json
+  auth: none
+}
+
+body:json {
+  [
+    {
+      "airdate": "1989-12-17",
+      "description": "\"Simpsons Roasting on an Open Fire\" (also known as \"The Simpsons Christmas Special\") is the first episode of Season 1 of The Simpsons, as well as the series premiere/pilot episode of the series. It is the show's only episode to be aired in the 1980s. (Minus the original shorts.)",
+      "episode_number": 1,
+      "image_url": "https://www.thetvdb.com/banners/episodes/1989/1/1.jpg",
+      "name": "Simpsons Roasting on an Open Fire",
+      "season": 1,
+      "synopsis": "When Mr. Burns announces that none of the workers will be getting Christmas bonuses and Marge reveals that she spent the extra Christmas gift money on getting Bart's \"Mother\" tattoo removed, Homer keeps his lack of funds for the holidays a secret and gets a job as a mall Santa."
+    },
+    {
+      "airdate": "1990-01-14",
+      "description": "\"Bart the Genius\" is the second episode of Season 1.",
+      "episode_number": 2,
+      "image_url": "https://www.thetvdb.com/banners/episodes/1989/1/1.jpg",
+      "name": "Bart the Genius",
+      "season": 1,
+      "synopsis": "To get back at class nerd/teacher's pet, Martin Prince, for ratting him out to Principal Skinner for vandalism on school property, Bart switches his own intelligence test with Martin's. During a parent/principal conference about the defaced wall, the school counselor, Dr. Pryor, announces that Bart is a genius and only acts out because public school isn't stimulating enough, so Bart is sent to a school for genius kids — and finds out just how painfully below average he is."
+    },
+    {
+      "airdate": "1990-01-21",
+      "description": "This episode was the third to be produced, despite being the first to be written. Otto Mann, Chief Wiggum, Jasper Beardly, Sherri and Terri, Waylon Smithers, Sylvia Winfield and Mr. Winfield make their first appearances. The Blinky species make a brief cameo and it is also the fish's first appearance.",
+      "episode_number": 3,
+      "image_url": "https://www.thetvdb.com/banners/episodes/1989/1/1.jpg",
+      "name": "Homer's Odyssey",
+      "season": 1,
+      "synopsis": "After being fired from his job at the nuclear plant and failing to find a new one, Homer becomes depressed and suicidal — but saving his family from getting hit by a truck prompts Homer to become a safety advocate for the entire town."
+    }
+  ]
+}
