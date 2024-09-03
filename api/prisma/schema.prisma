@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -15,20 +9,49 @@ datasource db {
 
 model Character {
   id Int @default(autoincrement()) @id
-  name String @unique
-  birthdate String
-  description String
-  occupation String
-  catchphrases String[]
   age Int
-  status String
-  gender Gender
-  quotes String[]
-  portrait_img String
+  birthdate String
+  catchphrases String[]
+  description String
+  first_appearance Episode @relation(fields: [first_appearance_id], references: [id])
+  first_appearance_id Int
   full_body_image String
+  gender Gender
+  name String @unique
+  occupation String
+  portrait_img String
+  quotes String[]
+  status String
 }
+
+// quotes and catchphrases in another db?
 
 enum Gender {
   Male
   Female
+}
+
+model Location {
+  id Int @default(autoincrement()) @id
+  address String
+  description String
+  first_appearance Episode @relation(fields: [first_appearance_id], references: [id])
+  first_appearance_id Int
+  image_url String
+  name String @unique
+  town String
+  use String
+}
+
+model Episode {
+  id Int @default(autoincrement()) @id
+  characters Character[]
+  description String
+  episode_number Int
+  image_url String
+  locations Location[]
+  name String @unique
+  airdate String
+  season Int
+  synopsis String
 }
