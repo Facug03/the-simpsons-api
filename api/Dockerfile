@@ -18,6 +18,7 @@ COPY tsconfig*.json .
 COPY .swcrc .
 COPY nest-cli.json .
 COPY src src
+COPY prisma prisma
 
 EXPOSE $PORT
 CMD ["npm", "run", "dev"]
@@ -35,8 +36,9 @@ COPY tsconfig*.json .
 COPY .swcrc .
 COPY nest-cli.json .
 COPY src src
+COPY prisma prisma
 
-RUN npm run build && \
+RUN npx prisma generate && npm run build && \
     npm prune --production
 
 FROM base AS production
