@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { Prisma } from '@prisma/client'
+import { Prisma, Character } from '@prisma/client'
 
 import { DatabaseService } from '@/src/database/database.service'
 
@@ -7,13 +7,13 @@ import { DatabaseService } from '@/src/database/database.service'
 export class CharacterService {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  async create(createCharactersDto: Prisma.CharacterCreateManyInput) {
+  create(createCharactersDto: Prisma.CharacterCreateManyInput): Promise<Character[]> {
     return this.databaseService.character.createManyAndReturn({
       data: createCharactersDto
     })
   }
 
-  async findOne(id: number) {
+  findOne(id: number): Promise<Character | null> {
     return this.databaseService.character.findUnique({
       where: { id },
       include: {
@@ -22,7 +22,9 @@ export class CharacterService {
     })
   }
 
-  async findPaginated(page: number) {
+  async findPaginated(
+    page: number
+  ): Promise<{ count: number; results: Omit<Character, 'first_appearance_id' | 'description'>[] }> {
     const count = await this.databaseService.character.count()
     const results = await this.databaseService.character.findMany({
       take: 20,

@@ -13,7 +13,7 @@ import {
   Query
 } from '@nestjs/common'
 import { CACHE_MANAGER } from '@nestjs/cache-manager'
-import { Prisma } from '@prisma/client'
+import { Prisma, Character as CharacterModel } from '@prisma/client'
 import type { Cache } from 'cache-manager'
 import type { FastifyReply, FastifyRequest } from 'fastify'
 
@@ -32,12 +32,16 @@ export class CharacterController {
 
   @Post()
   @UsePipes(new ZodValidationPipe(createCharactersSchema))
-  createMany(@Body() createCharactersDto: Prisma.CharacterCreateManyInput) {
+  createMany(@Body() createCharactersDto: Prisma.CharacterCreateManyInput): Promise<CharacterModel[]> {
     return this.charactersService.create(createCharactersDto)
   }
 
   @Get()
-  findPaginated(@Req() req: FastifyRequest, @Res() res: FastifyReply, @Query() { page = 1 }: IsPageDto) {
+  findPaginated(
+    @Req() req: FastifyRequest,
+    @Res() res: FastifyReply,
+    @Query() { page = 1 }: IsPageDto
+  ): Promise<{ count: number; results: Omit<CharacterModel, 'first_appearance_id' | 'description'>[] }> {
     const cacheKey = `character-paginated-${page}`
     const ttlInMs = 30000
 
@@ -52,7 +56,11 @@ export class CharacterController {
   }
 
   @Get(':id')
-  findOne(@Req() req: FastifyRequest, @Res() res: FastifyReply, @Param('id', ParseIntPipe) id: number) {
+  findOne(
+    @Req() req: FastifyRequest,
+    @Res() res: FastifyReply,
+    @Param('id', ParseIntPipe) id: number
+  ): Promise<CharacterModel> {
     const cacheKey = `character-${id}`
     const ttlInMs = 30000
 
@@ -66,7 +74,6 @@ export class CharacterController {
         const character = await this.charactersService.findOne(id)
 
         if (!character) {
-          console.log('character not found')
           throw new NotFoundException('Character not found')
         }
 
