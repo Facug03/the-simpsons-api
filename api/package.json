@@ -3,13 +3,8 @@
   "version": "1.0.0",
   "description": "The simpsons api",
   "author": "facundogonzales1550@gmail.com",
-  "license": "MIT",
+  "prefix": "./",
   "type": "module",
-  "keywords": [
-    "typescript",
-    "nestjs",
-    "api"
-  ],
   "engines": {
     "node": ">=18.x",
     "npm": ">=9.x"
