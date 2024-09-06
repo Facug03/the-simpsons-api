@@ -9,18 +9,17 @@ datasource db {
 
 model Character {
   id Int @default(autoincrement()) @id
-  age Int
-  birthdate String
-  catchphrases String[]
+  age Int?
+  birthdate String?
   description String
-  first_appearance Episode @relation(fields: [first_appearance_id], references: [id])
-  first_appearance_id Int
-  full_body_image String
+  first_appearance Episode? @relation(fields: [first_appearance_ep_id], references: [id])
+  first_appearance_ep_id Int?
+  first_appearance_sh_id Int?
   gender Gender
   name String @unique
   occupation String
-  portrait_img String
-  quotes String[]
+  phrases String[]
+  portrait_path String
   status String
 }
 
@@ -29,15 +28,16 @@ model Character {
 enum Gender {
   Male
   Female
+  Unknown
 }
 
 model Location {
   id Int @default(autoincrement()) @id
-  address String
   description String
-  first_appearance Episode @relation(fields: [first_appearance_id], references: [id])
-  first_appearance_id Int
-  image_url String
+  first_appearance Episode? @relation(fields: [first_appearance_sh_id], references: [id])
+  first_appearance_ep_id Int?
+  first_appearance_sh_id Int?
+  image_path String
   name String @unique
   town String
   use String
@@ -45,13 +45,13 @@ model Location {
 
 model Episode {
   id Int @default(autoincrement()) @id
+  airdate String
   characters Character[]
   description String
   episode_number Int
-  image_url String
+  image_path String
   locations Location[]
   name String @unique
-  airdate String
   season Int
   synopsis String
 }
