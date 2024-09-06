@@ -29,8 +29,7 @@ export class LocationService {
       select: {
         id: true,
         name: true,
-        address: true,
-        image_url: true,
+        image_path: true,
         town: true,
         use: true
       }

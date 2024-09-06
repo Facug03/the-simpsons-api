@@ -25,7 +25,7 @@ export class EpisodeService {
         id: true,
         airdate: true,
         episode_number: true,
-        image_url: true,
+        image_path: true,
         name: true,
         season: true,
         synopsis: true

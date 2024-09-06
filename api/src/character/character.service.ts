@@ -22,9 +22,10 @@ export class CharacterService {
     })
   }
 
-  async findPaginated(
-    page: number
-  ): Promise<{ count: number; results: Omit<Character, 'first_appearance_id' | 'description'>[] }> {
+  async findPaginated(page: number): Promise<{
+    count: number
+    results: Omit<Character, 'first_appearance_ep_id' | 'description' | 'first_appearance_sh_id'>[]
+  }> {
     const count = await this.databaseService.character.count()
     const results = await this.databaseService.character.findMany({
       take: 20,
@@ -33,13 +34,11 @@ export class CharacterService {
         id: true,
         age: true,
         birthdate: true,
-        catchphrases: true,
-        full_body_image: true,
         gender: true,
         name: true,
         occupation: true,
-        portrait_img: true,
-        quotes: true,
+        portrait_path: true,
+        phrases: true,
         status: true
       }
     })

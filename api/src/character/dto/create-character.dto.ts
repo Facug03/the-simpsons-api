@@ -2,18 +2,17 @@ import { z } from 'zod'
 
 export const createCharacterSchema = z
   .object({
-    age: z.number(),
-    birthdate: z.string(),
-    catchphrases: z.array(z.string()),
+    age: z.number().nullable(),
+    birthdate: z.string().nullable(),
     description: z.string(),
-    first_appearance_id: z.number(),
-    full_body_image: z.string(),
-    gender: z.enum(['Male', 'Female']),
+    first_appearance_ep_id: z.number().nullable().default(null),
+    first_appearance_sh_id: z.number().nullable().default(null),
+    gender: z.enum(['Male', 'Female', 'Unknown']).default('Unknown'),
     name: z.string(),
     occupation: z.string(),
-    portrait_img: z.string(),
-    quotes: z.array(z.string()),
-    status: z.string()
+    phrases: z.array(z.string()),
+    portrait_path: z.string(),
+    status: z.string().default('Unknown')
   })
   .required()
 

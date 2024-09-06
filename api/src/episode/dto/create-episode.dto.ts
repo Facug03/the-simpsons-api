@@ -5,7 +5,7 @@ export const createEpisodeSchema = z
     airdate: z.string(),
     description: z.string(),
     episode_number: z.number(),
-    image_url: z.string(),
+    image_path: z.string(),
     name: z.string(),
     season: z.number(),
     synopsis: z.string()
