@@ -8,10 +8,11 @@ import { DatabaseModule } from '@/src/database/database.module'
 import { CharacterModule } from '@/src/character/character.module'
 import { EpisodeModule } from '@/src/episode/episode.module'
 import { LocationModule } from '@/src/location/location.module'
+import { validateConfig } from '@/src/config/config.validation'
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, cache: true }),
+    ConfigModule.forRoot({ isGlobal: true, cache: true, validate: validateConfig }),
     CacheModule.register({ isGlobal: true }),
     LoggerModule,
     HealthModule,
