@@ -5,6 +5,7 @@ import { CharacterService } from './character.service'
 import { createCharactersSchema } from './dto/create-character.dto'
 import { ZodValidationPipe } from '@/src/pipes/zod-validation.pipe'
 import { IsPageDto } from '@/src/common/dto/pagination.dto'
+import { PaginationResponse } from '../common/interfaces/pagination-response.interface'
 
 @Controller('character')
 export class CharacterController {
@@ -17,10 +18,11 @@ export class CharacterController {
   }
 
   @Get()
-  findPaginated(@Query() { page = 1 }: IsPageDto): Promise<{
-    count: number
-    results: Omit<CharacterModel, 'first_appearance_ep_id' | 'description' | 'first_appearance_sh_id'>[]
-  }> {
+  findPaginated(
+    @Query() { page = 1 }: IsPageDto
+  ): Promise<
+    PaginationResponse<Omit<CharacterModel, 'first_appearance_ep_id' | 'description' | 'first_appearance_sh_id'>[]>
+  > {
     return this.charactersService.findPaginated(page)
   }
 
