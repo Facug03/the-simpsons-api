@@ -1,9 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager'
-import { Prisma } from '@prisma/client'
+import { Location, Prisma } from '@prisma/client'
 import { ConfigService } from '@nestjs/config'
 
 import { DatabaseService } from '@/src/database/database.service'
+import { PaginationResponse } from '@/src/common/interfaces/pagination-response.interface'
 
 @Injectable()
 export class LocationService {
@@ -13,13 +14,13 @@ export class LocationService {
     private configService: ConfigService
   ) {}
 
-  async create(createLocationsDto: Prisma.LocationCreateManyInput) {
+  async create(createLocationsDto: Prisma.LocationCreateManyInput): Promise<Location[]> {
     return this.databaseService.location.createManyAndReturn({
       data: createLocationsDto
     })
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<Location | null> {
     return this.databaseService.location.findUnique({
       where: { id },
       include: {
@@ -28,7 +29,11 @@ export class LocationService {
     })
   }
 
-  async findPaginated(page: number) {
+  async findPaginated(
+    page: number
+  ): Promise<
+    PaginationResponse<Omit<Location, 'description' | 'first_appearance_ep_id' | 'first_appearance_sh_id'>[]>
+  > {
     const cacheKey = 'location-count'
     let count = await this.cacheManager.get<number>(cacheKey)
 
