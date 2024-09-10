@@ -12,7 +12,8 @@ model Character {
   age Int?
   birthdate String?
   description String
-  first_appearance Episode? @relation(fields: [first_appearance_ep_id], references: [id])
+  first_appearance_ep Episode? @relation(fields: [first_appearance_ep_id], references: [episode_number])
+  first_appearance_sh Short? @relation(fields: [first_appearance_sh_id], references: [episode_number])
   first_appearance_ep_id Int?
   first_appearance_sh_id Int?
   gender Gender
@@ -23,8 +24,6 @@ model Character {
   status String
 }
 
-// quotes and catchphrases in another db?
-
 enum Gender {
   Male
   Female
@@ -34,7 +33,8 @@ enum Gender {
 model Location {
   id Int @default(autoincrement()) @id
   description String
-  first_appearance Episode? @relation(fields: [first_appearance_sh_id], references: [id])
+  first_appearance_ep Episode? @relation(fields: [first_appearance_ep_id], references: [id])
+  first_appearance_sh Short? @relation(fields: [first_appearance_sh_id], references: [id])
   first_appearance_ep_id Int?
   first_appearance_sh_id Int?
   image_path String
@@ -48,7 +48,20 @@ model Episode {
   airdate String
   characters Character[]
   description String
-  episode_number Int
+  episode_number Int @unique
+  image_path String
+  locations Location[]
+  name String @unique
+  season Int
+  synopsis String
+}
+
+model Short {
+  id Int @default(autoincrement()) @id
+  airdate String
+  characters Character[]
+  description String
+  episode_number Int @unique
   image_path String
   locations Location[]
   name String @unique
