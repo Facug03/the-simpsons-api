@@ -24,7 +24,8 @@ export class CharacterService {
     return this.databaseService.character.findUnique({
       where: { id },
       include: {
-        first_appearance: true
+        first_appearance_ep: true,
+        first_appearance_sh: true
       }
     })
   }

@@ -24,7 +24,8 @@ export class LocationService {
     return this.databaseService.location.findUnique({
       where: { id },
       include: {
-        first_appearance: true
+        first_appearance_sh: true,
+        first_appearance_ep: true
       }
     })
   }
