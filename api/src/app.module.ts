@@ -9,6 +9,7 @@ import { CharacterModule } from '@/src/character/character.module'
 import { EpisodeModule } from '@/src/episode/episode.module'
 import { LocationModule } from '@/src/location/location.module'
 import { validateConfig } from '@/src/config/config.validation'
+import { ShortModule } from '@/src/short/short.module'
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { validateConfig } from '@/src/config/config.validation'
     DatabaseModule,
     CharacterModule,
     EpisodeModule,
-    LocationModule
+    LocationModule,
+    ShortModule
   ]
 })
 export class AppModule {}
