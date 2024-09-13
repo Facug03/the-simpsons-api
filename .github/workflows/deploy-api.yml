@@ -3,7 +3,7 @@ name: Build and Deploy BackendApp to ECS
 on:
   push:
     branches:
-      - feat/video-cicd-ecs
+      - main
 
 env:
   ECR_IMAGE: ${{ vars.ECR_IMAGE }}
