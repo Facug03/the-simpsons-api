@@ -52,5 +52,5 @@ COPY --from=build $DIR/node_modules node_modules
 COPY --from=build $DIR/dist dist
 
 USER $USER
-EXPOSE 8080
+EXPOSE $PORT
 CMD ["dumb-init", "node", "dist/main.js"]
