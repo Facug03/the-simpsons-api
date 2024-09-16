@@ -10,6 +10,7 @@ import { EpisodeModule } from '@/src/modules/episode/episode.module'
 import { LocationModule } from '@/src/modules/location/location.module'
 import { ShortModule } from '@/src/modules/short/short.module'
 import { validateConfig } from '@/src/config/config.validation'
+import { AppControler } from './app.controler'
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { validateConfig } from '@/src/config/config.validation'
     EpisodeModule,
     LocationModule,
     ShortModule
-  ]
+  ],
+  controllers: [AppControler]
 })
 export class AppModule {}
