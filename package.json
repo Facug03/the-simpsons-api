@@ -12,6 +12,7 @@
     "npm": ">=9.x"
   },
   "scripts": {
+    "api:lock": "cd api && npm i --package-lock-only --workspaces=false",
     "dev": "npm run dev -w api",
     "test": "npm run test -w api",
     "lint": "eslint --ignore-path .gitignore . --ext .js,.mjs,cjs,.ts,.mts",
