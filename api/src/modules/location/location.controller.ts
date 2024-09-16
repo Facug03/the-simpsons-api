@@ -1,17 +1,30 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, UsePipes, NotFoundException, Query } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  UsePipes,
+  NotFoundException,
+  Query,
+  UseGuards
+} from '@nestjs/common'
 import { Location as LocationModel, Prisma } from '@prisma/client'
 
 import { LocationService } from './location.service'
 import { createLocationsSchema } from './dto/create-location.dto'
-import { ZodValidationPipe } from '@/src/pipes/zod-validation.pipe'
+import { ZodValidationPipe } from '@/src/common/pipes/zod-validation.pipe'
 import { IsPageDto } from '@/src/common/dto/pagination.dto'
 import { PaginationResponse } from '@/src/common/interfaces/pagination-response.interface'
+import { ApiKeyGuard } from '@/src/common/guards/api-key.guard'
 
 @Controller('location')
 export class CharacterController {
   constructor(private readonly locationService: LocationService) {}
 
   @Post()
+  @UseGuards(ApiKeyGuard)
   @UsePipes(new ZodValidationPipe(createLocationsSchema))
   createMany(@Body() createLocationsDto: Prisma.LocationCreateManyInput): Promise<LocationModel[]> {
     return this.locationService.create(createLocationsDto)
