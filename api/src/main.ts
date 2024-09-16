@@ -2,6 +2,7 @@ import { Logger, ValidationPipe } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify'
+import helmet from '@fastify/helmet'
 
 import { AppModule } from '@/src/app.module'
 
@@ -11,6 +12,9 @@ async function bootstrap() {
   app.enableCors()
   app.useGlobalPipes(new ValidationPipe({ transform: true }))
   app.setGlobalPrefix('api')
+  await app.register(helmet, {
+    contentSecurityPolicy: false
+  })
   const configService = app.get(ConfigService)
   const port = configService.get<string>('PORT', '3000')
 

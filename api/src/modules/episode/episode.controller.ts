@@ -1,17 +1,30 @@
-import { Body, Controller, Get, NotFoundException, Param, ParseIntPipe, Post, Query, UsePipes } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+  UseGuards,
+  UsePipes
+} from '@nestjs/common'
 import { Episode as EpisodeModel, Prisma } from '@prisma/client'
 
 import { EpisodeService } from './episode.service'
 import { createEpisodesSchema } from './dto/create-episode.dto'
-import { ZodValidationPipe } from '@/src/pipes/zod-validation.pipe'
+import { ZodValidationPipe } from '@/src/common/pipes/zod-validation.pipe'
 import { IsPageDto } from '@/src/common/dto/pagination.dto'
 import { PaginationResponse } from '@/src/common/interfaces/pagination-response.interface'
+import { ApiKeyGuard } from '@/src/common/guards/api-key.guard'
 
 @Controller('episode')
 export class EpisodeController {
   constructor(private readonly episodeService: EpisodeService) {}
 
   @Post()
+  @UseGuards(ApiKeyGuard)
   @UsePipes(new ZodValidationPipe(createEpisodesSchema))
   createMany(@Body() createEpisodesDto: Prisma.EpisodeCreateManyInput): Promise<EpisodeModel[]> {
     return this.episodeService.create(createEpisodesDto)

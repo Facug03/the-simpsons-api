@@ -3,7 +3,7 @@ import { Episode, Prisma } from '@prisma/client'
 import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager'
 import { ConfigService } from '@nestjs/config'
 
-import { DatabaseService } from '@/src/database/database.service'
+import { DatabaseService } from '@/src/modules/database/database.service'
 import { PaginationResponse } from '@/src/common/interfaces/pagination-response.interface'
 
 @Injectable()

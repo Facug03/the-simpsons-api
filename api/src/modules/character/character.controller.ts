@@ -1,17 +1,30 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, UsePipes, NotFoundException, Query } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  UsePipes,
+  NotFoundException,
+  Query,
+  UseGuards
+} from '@nestjs/common'
 import { Prisma, Character as CharacterModel } from '@prisma/client'
 
 import { CharacterService } from './character.service'
 import { createCharactersSchema } from './dto/create-character.dto'
-import { ZodValidationPipe } from '@/src/pipes/zod-validation.pipe'
+import { ZodValidationPipe } from '@/src/common/pipes/zod-validation.pipe'
 import { IsPageDto } from '@/src/common/dto/pagination.dto'
-import { PaginationResponse } from '../common/interfaces/pagination-response.interface'
+import { PaginationResponse } from '@/src/common/interfaces/pagination-response.interface'
+import { ApiKeyGuard } from '@/src/common/guards/api-key.guard'
 
 @Controller('character')
 export class CharacterController {
   constructor(private readonly charactersService: CharacterService) {}
 
   @Post()
+  @UseGuards(ApiKeyGuard)
   @UsePipes(new ZodValidationPipe(createCharactersSchema))
   createMany(@Body() createCharactersDto: Prisma.CharacterCreateManyInput): Promise<CharacterModel[]> {
     return this.charactersService.create(createCharactersDto)
