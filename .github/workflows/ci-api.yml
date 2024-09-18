@@ -34,8 +34,9 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm install -w=api
-        run: npm run build:api
+        run: |
+          npm install -w=api
+          npm run build:api
 
       - name: Run tests
         run: npm run test:api
