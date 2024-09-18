@@ -1,6 +1,7 @@
 import { Test } from '@nestjs/testing'
 import { Character as CharacterModel } from '@prisma/client'
 import { NotFoundException } from '@nestjs/common'
+
 import { IsPageDto } from '@/src/common/dto/pagination.dto'
 import { PaginationResponse } from '@/src/common/interfaces/pagination-response.interface'
 import { CharacterController } from '@/src/modules/character/character.controller'
@@ -73,9 +74,9 @@ describe('CharacterController', () => {
 
       mockCharacterService.findOne.mockResolvedValue(character)
 
-      const response = await characterController.findOne(1)
+      const response = await characterController.findOne(character.id)
       expect(response).toEqual(character)
-      expect(mockCharacterService.findOne).toHaveBeenCalledWith(1)
+      expect(mockCharacterService.findOne).toHaveBeenCalledWith(character.id)
     })
 
     it('should throw NotFoundException if character is not found', async () => {
