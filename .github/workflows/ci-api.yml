@@ -36,6 +36,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install -w=api
+          cd api && npx prisma generate && cd ..
           npm run build:api
 
       - name: Run tests
