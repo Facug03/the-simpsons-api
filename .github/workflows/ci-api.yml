@@ -15,7 +15,7 @@ env:
   LOGGER_LEVEL: log
   NODE_ENV: test
   PORT: 3000
-  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL_DEV }}
   APP_URL: http://localhost:3000
   API_KEY: random-key
 
