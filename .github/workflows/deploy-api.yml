@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "api/**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   ECR_IMAGE: ${{ vars.ECR_IMAGE }}

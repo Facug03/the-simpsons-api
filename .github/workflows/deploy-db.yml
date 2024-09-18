@@ -4,13 +4,19 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "api/prisma/**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
 jobs:
   deploy-production:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v4
