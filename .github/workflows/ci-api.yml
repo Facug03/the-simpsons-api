@@ -1,0 +1,42 @@
+name: Build and Test API
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "api/**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  LOGGER_LEVEL: log
+  NODE_ENV: test
+  PORT: 3000
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  APP_URL: http://localhost:3000
+  API_KEY: random-key
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install -w=api
+        run: npm run build:api
+
+      - name: Run tests
+        run: npm run test:api
+   
