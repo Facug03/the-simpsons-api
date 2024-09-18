@@ -20,7 +20,7 @@ import { PaginationResponse } from '@/src/common/interfaces/pagination-response.
 import { ApiKeyGuard } from '@/src/common/guards/api-key.guard'
 
 @Controller('location')
-export class CharacterController {
+export class LocationController {
   constructor(private readonly locationService: LocationService) {}
 
   @Post()
