@@ -18,7 +18,6 @@
     "lint:fix": "npm run lint -- --fix",
     "typos": "chmod +x scripts/check_typos.sh && ./scripts/check_typos.sh",
     "build:api": "npm run build -w api",
-    "api:prepare": "cd api && npm i --omit=dev --workspaces=false && npm run build",
     "api:lock": "cd api && npm i --package-lock-only --workspaces=false",
     "test:api": "npm run test -w api"
   },

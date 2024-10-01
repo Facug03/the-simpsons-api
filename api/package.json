@@ -14,6 +14,7 @@
     "build": "npm run build:clean && nest build --path tsconfig.prod.json",
     "start": "node dist/main.js",
     "dev": "nest start --watch --debug=0.0.0.0:9229",
+    "prepare:deploy": "npm ci --workspaces=false && npx prisma generate && npm run build && npm prune --production --workspaces=false",
     "test": "rimraf coverage .nyc_output && concurrently 'npm:test:unit' 'npm:test:e2e' && npm run calculate-global-test-coverage",
     "test:unit": "vitest run --coverage --config vitest.config.unit.ts",
     "test:e2e": "vitest run --coverage --config ./vitest.config.e2e.ts",
