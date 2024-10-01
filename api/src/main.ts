@@ -1,12 +1,13 @@
+import { NestFactory } from '@nestjs/core'
 import { Logger, ValidationPipe } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import { NestFactory } from '@nestjs/core'
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify'
 import helmet from '@fastify/helmet'
+import awsLambdaFastify from '@fastify/aws-lambda'
 
 import { AppModule } from '@/src/app.module'
 
-async function bootstrap() {
+export async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter())
 
   app.enableCors()
@@ -15,13 +16,24 @@ async function bootstrap() {
   await app.register(helmet, {
     contentSecurityPolicy: false
   })
+
   const configService = app.get(ConfigService)
-  const port = configService.get<string>('PORT', '3000')
-
-  await app.listen(port, '0.0.0.0')
-
+  const NODE_ENV = configService.get<string>('NODE_ENV')
   const logger = app.get(Logger)
-  logger.log(`App is ready and listening on port ${port} 🚀`)
+
+  if (NODE_ENV === 'production') {
+    await app.init()
+
+    logger.log('App is ready 🚀')
+
+    const fastifyApp = app.getHttpAdapter().getInstance()
+    return awsLambdaFastify(fastifyApp)
+  }
+
+  const PORT = configService.get<string>('PORT', '3000')
+  await app.listen(PORT, '0.0.0.0')
+
+  logger.log(`App is ready and listening on port ${PORT} 🚀`)
 }
 
 bootstrap().catch(handleError)

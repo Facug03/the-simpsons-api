@@ -12,13 +12,14 @@
     "npm": ">=9.x"
   },
   "scripts": {
-    "api:lock": "cd api && npm i --package-lock-only --workspaces=false",
     "dev": "npm run dev -w api",
     "test": "npm run test -w api",
     "lint": "eslint --ignore-path .gitignore . --ext .js,.mjs,cjs,.ts,.mts",
     "lint:fix": "npm run lint -- --fix",
     "typos": "chmod +x scripts/check_typos.sh && ./scripts/check_typos.sh",
     "build:api": "npm run build -w api",
+    "api:prepare": "cd api && npm i --omit=dev --workspaces=false && npm run build",
+    "api:lock": "cd api && npm i --package-lock-only --workspaces=false",
     "test:api": "npm run test -w api"
   },
   "devDependencies": {
