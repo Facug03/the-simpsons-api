@@ -12,7 +12,7 @@ export function JsonDisplay({ data, className = '' }: JsonDisplayProps) {
   return (
     <div className={`bg-gray-900 rounded-lg overflow-hidden ${className}`}>
       <SyntaxHighlighter
-        language="json"
+        language='json'
         style={vscDarkPlus}
         customStyle={{
           margin: 0,
