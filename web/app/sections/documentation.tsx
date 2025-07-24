@@ -10,6 +10,8 @@ import { Pagination } from '@/components/docs/pagination'
 import { Images } from '@/components/docs/images'
 import { getCharacterById } from '@/services/characters'
 
+const DEFAULT_CHARACTER_ID = 5
+
 export async function Documentation({
   characters,
   episodes,
