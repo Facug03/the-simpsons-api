@@ -19,7 +19,7 @@ export async function Documentation({
   episodes: EpisodePagination
   locations: LocationPagination
 }) {
-  const [characterDetailError, characterDetail] = await getCharacterById(5)
+  const [characterDetailError, characterDetail] = await getCharacterById(DEFAULT_CHARACTER_ID)
 
   if (characterDetailError) {
     throw characterDetailError
