@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Character {
+  id Int @default(autoincrement()) @id
+  age Int?
+  birthdate String?
+  description String
+  first_appearance_ep Episode? @relation(fields: [first_appearance_ep_id], references: [episode_number])
+  first_appearance_sh Short? @relation(fields: [first_appearance_sh_id], references: [episode_number])
+  first_appearance_ep_id Int?
+  first_appearance_sh_id Int?
+  gender Gender
+  name String @unique
+  occupation String
+  phrases String[]
+  portrait_path String
+  status String
+}
+
+enum Gender {
+  Male
+  Female
+  Unknown
+}
+
+model Location {
+  id Int @default(autoincrement()) @id
+  description String
+  first_appearance_ep Episode? @relation(fields: [first_appearance_ep_id], references: [id])
+  first_appearance_sh Short? @relation(fields: [first_appearance_sh_id], references: [id])
+  first_appearance_ep_id Int?
+  first_appearance_sh_id Int?
+  image_path String
+  name String @unique
+  town String
+  use String
+}
+
+model Episode {
+  id Int @default(autoincrement()) @id
+  airdate String
+  characters Character[]
+  description String
+  episode_number Int @unique
+  image_path String
+  locations Location[]
+  name String @unique
+  season Int
+  synopsis String
+}
+
+model Short {
+  id Int @default(autoincrement()) @id
+  airdate String
+  characters Character[]
+  description String
+  episode_number Int @unique
+  image_path String
+  locations Location[]
+  name String @unique
+  season Int
+  synopsis String
+}

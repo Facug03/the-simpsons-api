@@ -1,0 +1,20 @@
+meta {
+  name: characters
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{URL}}/characters?page=10
+  body: none
+  auth: inherit
+}
+
+params:query {
+  page: 10
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
