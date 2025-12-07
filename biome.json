@@ -154,7 +154,7 @@
             "noUnreachable": "off",
             "noUnreachableSuper": "off"
           },
-            "style": { "useConst": "error" },
+          "style": { "useConst": "error" },
           "suspicious": {
             "noDuplicateClassMembers": "off",
             "noDuplicateObjectKeys": "off",
