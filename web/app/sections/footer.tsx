@@ -48,6 +48,15 @@ export function Footer() {
               >
                 FacuG03
               </Link>
+              {' | '}
+              <Link
+                href='https://www.linkedin.com/in/facundogonza/'
+                target='_blank'
+                className='text-gray-700 hover:text-gray-400 font-semibold underline'
+                data-umami-event='Footer linkedin'
+              >
+                LinkedIn
+              </Link>
             </p>
             <div className='text-gray-500 text-xs'>
               <p>
