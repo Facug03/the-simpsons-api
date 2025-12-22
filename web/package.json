@@ -1,7 +1,8 @@
 {
-  "name": "my-v0-project",
+  "name": "the-simpsons-api-website",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "next build",
     "dev": "next dev --turbopack",
@@ -16,7 +17,7 @@
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "lucide-react": "0.454.0",
-    "next": "15.2.4",
+    "next": "16.1.1",
     "react": "19",
     "react-dom": "19",
     "react-syntax-highlighter": "^15.6.1",
