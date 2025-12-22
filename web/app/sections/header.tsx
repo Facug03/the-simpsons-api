@@ -23,7 +23,7 @@ export function Header() {
               className='hover:text-gray-500 text-sm sm:text-base'
               data-umami-event='Header documentation'
             >
-              Documentation
+              Docs
             </Link>
             <Link href='/about' className='hover:text-gray-500 text-sm sm:text-base' data-umami-event='Header about'>
               About
