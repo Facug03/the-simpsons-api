@@ -1,8 +1,6 @@
-import { Header } from '@/sections/header'
 import { Hero } from '@/sections/hero'
 import { ApiOverview } from '@/sections/api-overview'
 import { Documentation } from '@/sections/documentation'
-import { Footer } from '@/sections/footer'
 import { getCharacters } from '@/services/characters'
 import { getEpisodes } from '@/services/episodes'
 import { getLocations } from '@/services/locations'
@@ -30,14 +28,12 @@ export default async function Home() {
 
   return (
     <ScrollTracker thresholds={[25, 50, 75, 100]} debounceMs={500}>
-      <div className='bg-sky-50 divide-y'>
-        <Header />
+      <main className='divide-y bg-sky-50'>
         <Hero />
         <ApiOverview characters={characters} episodes={episodes} locations={locations} />
         <Documentation characters={characters} episodes={episodes} locations={locations} />
         <PopularCharacters characters={characters} />
-        <Footer />
-      </div>
+      </main>
     </ScrollTracker>
   )
 }

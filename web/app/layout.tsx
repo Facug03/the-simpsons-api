@@ -3,6 +3,8 @@ import { Ubuntu } from 'next/font/google'
 import Script from 'next/script'
 
 import './globals.css'
+import { Header } from './sections/header'
+import { Footer } from './sections/footer'
 
 export const metadata: Metadata = {
   title: {
@@ -95,7 +97,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={ubuntu.className}>{children}</body>
+      <body className={`${ubuntu.className} divide-y`}>
+        <Header />
+        {children}
+        <Footer />
+      </body>
       <Script src='https://cloud.umami.is/script.js' data-website-id='a8de3e62-e698-4ac0-84ab-fad69aaeb376' defer />
     </html>
   )

@@ -4,7 +4,7 @@ import { Circle } from 'lucide-react'
 
 export function Footer() {
   return (
-    <footer className=' py-12'>
+    <footer className='bg-sky-50 py-12'>
       <div className='container mx-auto px-4'>
         <div className='text-center'>
           <div className='flex items-center justify-center mb-4'>
