@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/app/components/ui/button'
+import { SupportModal } from '@/app/components/support-modal'
 import { Github } from 'lucide-react'
 
 export function Header() {
@@ -35,6 +36,7 @@ export function Header() {
             >
               Example
             </Link>
+            <SupportModal />
             <Button
               variant='outline'
               asChild
