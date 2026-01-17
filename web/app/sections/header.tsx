@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/app/components/ui/button'
 import { SupportModal } from '@/app/components/support-modal'
+import { MobileMenu } from '@/app/components/mobile-menu'
 import { Github } from 'lucide-react'
 
 export function Header() {
@@ -18,35 +19,34 @@ export function Header() {
               className='w-36 h-8 sm:w-52 sm:h-10'
             />
           </Link>
-          <div className='flex items-center space-x-2 sm:space-x-6'>
-            <Link
-              href='/#docs'
-              className='hover:text-gray-500 text-sm sm:text-base'
-              data-umami-event='Header documentation'
-            >
+          <div className='hidden sm:flex items-center space-x-4'>
+            <Link href='/#docs' className='hover:text-gray-500 text-base' data-umami-event='Header documentation'>
               Docs
             </Link>
-            <Link href='/about' className='hover:text-gray-500 text-sm sm:text-base' data-umami-event='Header about'>
+            <Link href='/about' className='hover:text-gray-500 text-base' data-umami-event='Header about'>
               About
             </Link>
-            <Link
-              href='/#example'
-              className='hover:text-gray-500 text-sm sm:text-base'
-              data-umami-event='Header example'
-            >
+            <Link href='/#example' className='hover:text-gray-500 text-base' data-umami-event='Header example'>
               Example
             </Link>
+            <div className='flex items-center space-x-2'>
+              <SupportModal />
+              <Button
+                variant='outline'
+                asChild
+                className='rounded-full border-black h-10 w-10'
+                data-umami-event='Header github'
+              >
+                <Link href='https://github.com/Facug03/the-simpsons-api' target='_blank'>
+                  <Github className='h-4 w-4' />
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          <div className='flex sm:hidden items-center space-x-2'>
             <SupportModal />
-            <Button
-              variant='outline'
-              asChild
-              className='rounded-full border-black h-8 w-8 sm:h-10 sm:w-10'
-              data-umami-event='Header github'
-            >
-              <Link href='https://github.com/Facug03/the-simpsons-api' target='_blank'>
-                <Github className='h-4 w-4' />
-              </Link>
-            </Button>
+            <MobileMenu />
           </div>
         </nav>
       </div>
