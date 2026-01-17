@@ -10,7 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-dialog": "1.1.15",
     "@radix-ui/react-slot": "1.1.1",
     "@radix-ui/react-tabs": "1.1.2",
     "@uidotdev/usehooks": "2.4.1",
@@ -21,7 +21,7 @@
     "next": "16.1.1",
     "react": "19",
     "react-dom": "19",
-    "react-syntax-highlighter": "^15.6.1",
+    "react-syntax-highlighter": "15.6.1",
     "tailwind-merge": "2.5.5",
     "tailwindcss-animate": "1.0.7"
   },
